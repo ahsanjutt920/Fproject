@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Fproject.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Fproject.Models;
 
 namespace Fproject
 {
@@ -37,6 +38,11 @@ namespace Fproject
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<FprojectContext>(options =>
+               options.UseSqlServer(
+                   Configuration.GetConnectionString("MyDb")));
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
