@@ -32,19 +32,25 @@ namespace Fproject.Controllers
         public IActionResult EditStudent(int Id)
         {
             Student S = ORM.Student.Where(m => m.Id == Id).FirstOrDefault<Student>();
-            return View();
+            return View(S);
         }
         [HttpPost]
         public IActionResult EditStudent(Student S)
         {
             ORM.Student.Update(S);
             ORM.SaveChanges();
-            return View();
+            return RedirectToAction("AllStudent");
+        }
+
+        public IActionResult AllStudent()
+        {
+            IList<Student> AllStudent = ORM.Student.ToList<Student>();
+            return View(AllStudent);
         }
         public IActionResult DetailStudent(int Id)
         {
             Student S = ORM.Student.Where(m => m.Id == Id).FirstOrDefault<Student>();
-            return View();
+            return View(S);
         }
         public IActionResult DeleteStudent(Student S)
         {
